@@ -1,5 +1,4 @@
 Pruebas de Aceptación del Proyecto SkillSwap
-Pruebas de Aceptación (Acceptance Tests) - Proyecto SkillSwap
 
 Este repositorio contiene las pruebas de aceptación para el proyecto SkillSwap (Innovify), desarrollado para el curso de IHC y Tecnologías Móviles (CC52) de la Universidad Peruana de Ciencias Aplicadas (UPC).
 
