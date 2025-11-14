@@ -1,10 +1,31 @@
 Feature: Solicitar ayuda a un tutor
-Como estudiante aprendiz, quiero un botón claro de "Solicitar tutoría" en el perfil del tutor para iniciar el contacto.
-Scenario: Iniciar solicitud
-Given que he revisado el perfil de un tutor y quiero su ayuda,
-When hago clic en el botón "Solicitar tutoría",
-Then se abre una ventana o formulario para que pueda escribir mi mensaje.
-Scenario: Botón deshabilitado para tutores de la misma universidad (Negativo)
-Given que llego al perfil de un tutor de mi misma universidad,
-When busco el botón de solicitud,
-Then el botón "Solicitar tutoría" está deshabilitado o no es visible.
+  Como estudiante aprendiz
+  Quiero un botón claro de "Solicitar tutoría"
+  Para iniciar el contacto con un tutor
+
+  Scenario Outline: Iniciar solicitud de tutoría
+    Given que el <usuario> revisa el perfil del <tutor> y desea su ayuda
+    When hace clic en el botón "Solicitar tutoría"
+    Then se abre un formulario para escribir un mensaje
+
+    Examples: Datos de entrada
+      | usuario    | tutor         |
+      | Aprendiz01 | Maria Torres  |
+
+    Examples: Datos de salida
+      | formulario_abierto |
+      | Sí                 |
+
+
+  Scenario Outline: Botón deshabilitado para tutores de la misma universidad (Negativo)
+    Given que el <usuario> y el <tutor> pertenecen a la misma universidad
+    When el usuario busca el botón de solicitud
+    Then el botón está deshabilitado o no es visible
+
+    Examples: Datos de entrada
+      | usuario    | universidad_usuario | tutor         | universidad_tutor |
+      | Aprendiz02 | UNI                 | Pedro Ramos   | UNI               |
+
+    Examples: Datos de salida
+      | solicitutoria_visible |
+      | No                    |

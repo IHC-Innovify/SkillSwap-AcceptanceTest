@@ -1,14 +1,45 @@
-Feature: Búsqueda de tutores (HU-04)
-Como estudiante aprendiz, quiero ver un dashboard principal al iniciar sesión que me muestre una barra de búsqueda para encontrar un tema, curso o tutor fácilmente.
-Scenario: Búsqueda de cursos o temas
-Given que necesito ayuda en "Cálculo 2",
-When escribo "Cálculo 2" en la barra de búsqueda y presiono Enter,
-Then la plataforma me muestra una lista de tutores que enseñan esa materia.
-Scenario: Búsqueda de profesores
-Given que quiero volver a reunirme con "José Olaya",
-When escribo "José Olaya" en la barra de búsqueda y presiono Enter,
-Then la plataforma me muestra una lista de tutores que tengan ese nombre.
-Scenario: Búsqueda sin resultados
-Given que busco una materia muy específica que nadie ofrece,
-When realizo la búsqueda,
-Then el sistema me muestra un mensaje amigable como "No se encontraron tutores. Intenta con otra materia".
+Feature: Búsqueda de tutores
+  Como estudiante aprendiz
+  Quiero un dashboard principal con una barra de búsqueda
+  Para encontrar temas, cursos o tutores fácilmente
+
+  Scenario Outline: Búsqueda de cursos o temas
+    Given que el <usuario> necesita ayuda en <materia>
+    When escribe <materia> en la barra de búsqueda y presiona Enter
+    Then la plataforma muestra una lista de tutores que enseñan esa materia
+
+    Examples: Datos de entrada
+      | usuario    | materia    |
+      | Aprendiz01 | Cálculo 2  |
+
+    Examples: Datos de salida
+      | resultados        |
+      | Lista de tutores  |
+
+
+  Scenario Outline: Búsqueda de profesores
+    Given que el <usuario> quiere reunirse nuevamente con <nombre_tutor>
+    When escribe <nombre_tutor> en la barra de búsqueda y presiona Enter
+    Then se muestra una lista de tutores con ese nombre
+
+    Examples: Datos de entrada
+      | usuario    | nombre_tutor |
+      | Aprendiz02 | José Olaya   |
+
+    Examples: Datos de salida
+      | resultados        |
+      | Lista de tutores  |
+
+
+  Scenario Outline: Búsqueda sin resultados
+    Given que el <usuario> busca una materia muy específica
+    When realiza la búsqueda
+    Then el sistema muestra el mensaje "No se encontraron tutores. Intenta con otra materia."
+
+    Examples: Datos de entrada
+      | usuario    | materia_inexistente |
+      | Aprendiz03 | Cibernética Cuántica |
+
+    Examples: Datos de salida
+      | mensaje                                                   |
+      | No se encontraron tutores. Intenta con otra materia.     |
